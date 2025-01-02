@@ -39,8 +39,7 @@ public class Day5 {
 
     }
     public static boolean estaOrdenCorrecto(List<String> orden,int[] actualizaciones){
-        int num, num1;
-        int j=0;
+        int num;
         boolean bol=true;
         List<Integer> nums=new LinkedList<>();
         int i=0;
