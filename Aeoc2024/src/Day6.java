@@ -43,8 +43,8 @@ public class Day6 {
                 }
                 casillasVisitadas.add(filaplayer + "," + indexPlayer);
 
-                if (calcularGiro(player, mapa, indexPlayer, filaplayer) != null) {
-                    rotacion = calcularGiro(player, mapa, indexPlayer, filaplayer);
+                if (getGiro(player, mapa, indexPlayer, filaplayer) != null) {
+                    rotacion = getGiro(player, mapa, indexPlayer, filaplayer);
                 }
                 String line = mapa.get(filaplayer);
                 if (rotacion == 0) {
@@ -77,7 +77,7 @@ public class Day6 {
         }
     }
 
-    public static Integer calcularGiro(char ch, ArrayList<String> mapa, int indice, int fila) {
+    public static Integer getGiro(char ch, ArrayList<String> mapa, int indice, int fila) {
         Integer integer = null;
         if (ch == '^') {
             if (mapa.get(fila - 1).charAt(indice) == '#') {
