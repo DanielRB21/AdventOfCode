@@ -8,6 +8,7 @@ import java.util.Set;
  */
 public class Day6 {
     public static void main(String[] args) throws IOException {
+
         BufferedReader bf = new BufferedReader(new FileReader("inputs" + File.separator + "06" + File.separator + "input.txt"));
         String linea;
         ArrayList<String> mapa = new ArrayList<>();
@@ -70,7 +71,7 @@ public class Day6 {
                     mapa.set(filaplayer, line);
                 }
                 casillasVisitadas.add(filaplayer + "," + indexPlayer);
-                pintarMapa(mapa);
+                //pintarMapa(mapa);
             }
         } catch (IndexOutOfBoundsException ioe) {
             System.out.println("Ruta finalizada" + " Casillas: " + casillasVisitadas.size());
