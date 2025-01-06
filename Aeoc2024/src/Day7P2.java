@@ -29,6 +29,7 @@ public class Day7P2 {
             }
             linea= bf.readLine();
         }
+        bf.close();
         System.out.println(acum);
 
     }
