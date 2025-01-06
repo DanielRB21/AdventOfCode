@@ -1,15 +1,16 @@
-import java.io.*;
-import java.net.Inet4Address;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
- * @author Daniel Solis Alfonso
+         @author Daniel Solis Alfonso
  */
-public class Day7 {
+public class Day7P2 {
     public static void main(String[] args) throws IOException {
-        BufferedReader bf=new BufferedReader(new FileReader("inputs"+ File.separator+"07"+File.separator+"input1.txt"));
+        BufferedReader bf=new BufferedReader(new FileReader("inputs"+ File.separator+"07"+File.separator+"input.txt"));
         String linea;
         long testvalor;
         int[] valores;
@@ -23,10 +24,10 @@ public class Day7 {
             for(int i=0;i<valores.length;i++){
                 valores[i]= Integer.parseInt(valoreslinea[i]);
             }
-        if(esValida(testvalor,valores)){
-            acum+=testvalor;
-        }
-        linea= bf.readLine();
+            if(esValida(testvalor,valores)){
+                acum+=testvalor;
+            }
+            linea= bf.readLine();
         }
         System.out.println(acum);
 
@@ -40,12 +41,12 @@ public class Day7 {
                 long num= resultados.remove(0);
                 resultados1.add((long) (num * valores[i]));
                 resultados1.add((long) (num+valores[i]));
+                resultados1.add(Long.parseLong(""+num+valores[i]));
             }
             resultados=new ArrayList<>(resultados1);
             //System.out.println(resultados);
         }
-       // System.out.println("Tamanio: "+resultados.size());
+        //System.out.println("Tamanio: "+resultados.size());
         return resultados.contains(testvalor);
     }
-
 }
