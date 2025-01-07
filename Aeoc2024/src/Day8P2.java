@@ -7,12 +7,15 @@ import java.util.*;
 /**
  * @author Daniel Solis Alfonso
  */
+// 688 too low
+//answer 839
 public class Day8P2 {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new FileReader("Inputs" + File.separator + "08" + File.separator + "input.txt"));
         String linea;
+        Antinodo[] antinodos1 = null;
+        int cont = 0;
         List<String> mapa = new ArrayList<>();
-        ;
         linea = bf.readLine();
         while (linea != null) {
             mapa.add(linea);
@@ -31,6 +34,8 @@ public class Day8P2 {
                     Antena antenaA = antenaList.get(k);
                     Antena antenaB = antenaList.get(j);
                     Antinodo[] antinodos = getAntinodos(antenaA, antenaB);
+                    antinodos1 = getAntinodos2(antenaA, antenaB,xTotal,yTotal);
+                    cont += antinodos1.length;
                     for (Antinodo antinodo : antinodos) {
                         if (antinodo.x < xTotal && antinodo.x >= 0 && antinodo.y < yTotal && antinodo.y >= 0) {
                             if (setAntinodo.add(antinodo)) {
@@ -38,10 +43,13 @@ public class Day8P2 {
                             }
                         }
                     }
+                    for (Antinodo antinodo : antinodos1) {
+                        System.out.println("Antinodos 2 x: " + antinodo.x + " y: " + antinodo.y);
+                    }
                 }
             }
         }
-        System.out.println(setAntinodo.size());
+        System.out.println(setAntinodo.size() + cont);
     }
 
     public static class Antena {
@@ -152,4 +160,38 @@ public class Day8P2 {
         }
         return new Antinodo[]{antinodo, antinodo1};
     }
+
+    public static Antinodo[] getAntinodos2(Antena antenaA, Antena antenaB, int totalX, int totalY) {
+        List<Antinodo> antinodos = new ArrayList<>();
+
+        if (antenaA.x >= 0 && antenaA.x < totalX && antenaA.y >= 0 && antenaA.y < totalY) {
+            antinodos.add(new Antinodo(antenaA.x, antenaA.y));
+        }
+        if (antenaB.x >= 0 && antenaB.x < totalX && antenaB.y >= 0 && antenaB.y < totalY) {
+            antinodos.add(new Antinodo(antenaB.x, antenaB.y));
+        }
+        // Verificar alineación diagonal
+        int deltaX = Math.abs(antenaA.x - antenaB.x);
+        int deltaY = Math.abs(antenaA.y - antenaB.y);
+        if (deltaX == deltaY) {
+            int stepX = antenaA.x < antenaB.x ? 1 : -1;
+            int stepY = antenaA.y < antenaB.y ? 1 : -1;
+
+            int x = antenaA.x, y = antenaA.y;
+            while (x != antenaB.x && y != antenaB.y) {
+                if (x >= 0 && x < totalX && y >= 0 && y < totalY) {
+                    antinodos.add(new Antinodo(x, y));
+                }
+                x += stepX;
+                y += stepY;
+            }
+
+            if (antenaB.x >= 0 && antenaB.x < totalX && antenaB.y >= 0 && antenaB.y < totalY) {
+                antinodos.add(new Antinodo(antenaB.x, antenaB.y));
+            }
+        }
+
+        return antinodos.toArray(new Antinodo[0]);
+    }
 }
+
