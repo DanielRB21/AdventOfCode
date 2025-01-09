@@ -12,7 +12,6 @@ import java.util.*;
 // 6360094256423 answer
 public class Day9 {
     public static void main(String[] args) throws IOException {
-        long startTime = System.nanoTime();
         BufferedReader bf = new BufferedReader(new FileReader("Inputs" + File.separator + "09" + File.separator + "input.txt"));
         String mapaDisco;
         List<Integer> listaNumeros = new ArrayList<>();
@@ -80,10 +79,7 @@ public class Day9 {
             acum+= (long) orden * listaNumeros.remove(0);
             orden++;
         }
-
         System.out.println(acum);
-        long totalTime = (System.nanoTime()-startTime)/1000000;
-        System.out.println(totalTime+" ms");
     }
 
     public static int countDigit(int n) {
